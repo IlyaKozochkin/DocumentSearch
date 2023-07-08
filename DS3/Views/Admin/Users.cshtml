@@ -1,0 +1,38 @@
+﻿@model IEnumerable<User>
+
+@{
+    ViewData["Title"] = "Пользователи";
+}
+
+<h1>Пользователи</h1>
+<p>
+    <a asp-action="CreateUser">Добавить пользователя</a>
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Имя</th>
+            <th>Фамилия</th>
+            <th>Роль</th>
+            <th></th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <th>@Html.DisplayFor(modelItem => item.FirstName)</th>
+                <th>@Html.DisplayFor(modelItem => item.LastName)</th>
+                <th>@Html.DisplayFor(modelItem => item.Role.Name)</th>
+                <th>
+                    <a class="btn btn-sm btn-primary" asp-action="EditRoleUser" asp-route-userId="@item.Id">Управление ролью</a>
+                </th>
+                <th>
+                    <a class="btn btn-sm btn-danger" asp-action="DeleteUser" asp-route-userId="@item.Id">Удалить пользователя</a>
+                </th>
+            </tr>
+        }
+    </tbody>
+</table>

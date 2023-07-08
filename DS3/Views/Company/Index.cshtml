@@ -1,0 +1,36 @@
+﻿@{ 
+    ViewData["Title"] = "Document Search"; 
+} 
+@*<head> 
+    <style> 
+        input { 
+            font-size: 25px; 
+        } 
+ 
+        button { 
+            font-size: 25px; 
+        } 
+ 
+        .display-4 { 
+            font-size: 80px; 
+        } 
+
+        .search{
+            height: 10em;
+            position: relative;
+            top: 50%;
+            transform: translate(0, 150%)
+        }
+    </style> 
+</head> *@
+<body>
+    <div class="text-center"> 
+        <h1 class="display-4">Document Search</h1> 
+        <br /><br /><br /><br /><br /><br /><br /><br />
+        <form class="search" method="post" action="/Company/Documents"> 
+            <input name="request" type="search" placeholder="Искать здесь..." style="width: 89%;" autofocus required>
+            <button type="submit" style="width: 10%;">Поиск</button>
+        </form> 
+        <a asp-controller="Home" asp-action="Index">Переключить на поиск среди законов</a>
+    </div> 
+</body>

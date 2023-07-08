@@ -1,0 +1,106 @@
+﻿@using DS3.Models
+@model List<Document>
+
+@{ 
+    ViewData["Title"] = "Результаты поиска"; 
+} 
+
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <meta charset="utf-8">
+    <title>Законы</title>
+
+  <style>
+    body{
+      background-color: #dedede;
+    }
+    .search-results {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .result {
+      border: 2px solid #ccc;
+      padding: 10px;
+      margin-bottom: 10px;
+      border-radius: 15px;
+      background-color: whitesmoke;
+      display: flex;
+      max-width: 70%;
+      width: 100%;
+      box-sizing: border-box;
+      border-color: #73738c;
+    }
+
+    .result:hover {
+      background-color: #b5b5b5; /* Измените на цвет фона, который вам нужен */
+    }
+
+    .result-title {
+      font-size: 18px;
+      font-weight: bold;
+      margin-top: 0;
+    }
+
+    .result-content {
+      display: flex;
+      align-items: center;
+    }
+
+    .result-description {
+      font-size: 14px;
+      color: #666;
+    }
+
+    .result-icon {
+      margin-right: 10px;
+      width: 50px;
+      height: 50px;
+    }
+
+    /* Добавленный код */
+    .result-left {
+      flex-basis: 5%;
+      display: flex;
+      justify-content: center; /* Добавленный код: Центрирование по горизонтали */
+      align-items: center;
+    }
+
+    .result-center {
+      flex-basis: 80%;
+      border-right: 2px solid #ccc; /* Добавленный код: Правая граница */
+      padding-right: 10px; /* Изменение: Отступ справа */
+    }
+
+    .result-right {
+      flex-basis: 15%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding-left: 10px; /* Изменение: Отступ слева */
+      padding-right: 10px; /* Изменение: Отступ справа */
+      text-align: center; /* Изменение: Центрирование текста внутри блока */
+    }
+  </style>
+</head>
+
+<body>
+    @foreach (var item in Model)
+    {
+        <div class="search-results">
+            <a href="@Url.ActionLink("PDFopen", "Home", new { filePath = @item.FileName })" class="result-link result" style="text-decoration: none; color: inherit;">
+                <div class="result-left">
+                    <img src="~/images/@(item.TypeDoc.Name).png" class="result-icon">
+                </div>
+                <div class="result-center">
+                    <h3 class="result-title">@item.Name</h3>
+                </div>
+        
+                <div class="result-right">
+                    <p style="font-family: MyCustomFont;">@item.TypeDoc.Name</p>
+                </div>
+            </a>
+        </div>
+    }
+</body>

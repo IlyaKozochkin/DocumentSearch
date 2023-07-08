@@ -1,0 +1,32 @@
+﻿@using DS3.Models
+@model List<CompanyDocument>
+
+@{ 
+    ViewData["Title"] = "Результаты поиска"; 
+} 
+
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <meta charset="utf-8">
+    <title>Документы</title>
+</head>
+
+<body>
+    <table class="table">
+        <tr>
+            <th>Название</th>
+            <th></th>
+        </tr>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Name</td>
+                @*@if (User.Identity!.IsAuthenticated)
+                {
+                    <td>@Html.ActionLink("Скачать", "DownloadFile", new { fileName = item.FileName })</td>
+                }*@
+                <td>@Html.ActionLink("Скачать", "DownloadFile", new { fileName = item.FileName })</td>
+            </tr>
+        }
+    </table>
+</body>

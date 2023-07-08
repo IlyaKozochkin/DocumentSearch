@@ -1,0 +1,20 @@
+﻿@model EditRoleViewModel
+
+@{ 
+    ViewData["Title"] = "Изменение роли"; 
+} 
+
+<h2>Редактирование пользователя: @Model.Login</h2>
+
+<form asp-action="EditRoleUser" method="post">
+    <input type="hidden" asp-for="UserId" />
+
+    <div class="form-group">
+        <label asp-for="SelectedRoleId">Назначить роль:</label>
+        <select asp-for="SelectedRoleId" asp-items="@Model.AvailableRoles.Select(r => new SelectListItem { Value = r.Id.ToString(), Text = r.Name })">
+            @*<option value="">-- Выберите роль --</option>*@
+        </select>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Save</button>
+</form>

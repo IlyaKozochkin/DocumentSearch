@@ -1,0 +1,276 @@
+﻿@model List<TypeDoc>
+
+@{
+ViewData["Title"] = "Document Search";
+}
+
+<head>
+    <style>
+    body{
+      background-image: url(../images/flagproz.jpg);
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center;
+    }
+
+    .main {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-family: Arial, sans-serif;
+    }
+
+    #logo {
+        position: absolute;
+        top: 65px;
+        left: 10px;
+        height: 16%;
+    }
+
+    .head_name {
+        position: absolute;
+        top: 20%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    @@media (max-width: 600px) {
+        #logo {
+            width: 30%;
+        }
+
+        .head_name {
+            top: 10%;
+            height: auto;
+            text-align: center;
+        }
+
+        #searchbox {
+            top: 40%;
+            width: 80%;
+        }
+    }
+
+    #searchbox {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 60%;
+        height: 50px;
+    }
+
+    #searchbox input[type="text"] {
+        width: 100%;
+        height: 100%;
+        padding-right: 80px;
+        box-sizing: border-box;
+        border: 2px solid;
+        border-radius: 20px;
+        outline: none;
+        color: black;
+        padding-left: 20px;
+    }
+
+    #searchbox .button-container {
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 80px;
+        height: 100%;
+        display: flex;
+        align-items: center;
+    }
+
+    #searchbox .button {
+        width: 30px;
+        height: 30px;
+        margin-left: 10px;
+    }
+
+    .checkbox-container {
+        display: flex;
+        align-items: center;
+    }
+
+    .checkbox-container input[type="checkbox"] {
+        display: block;
+        width: 15px;
+        height: 15px;
+        background-repeat: no-repeat;
+        background-position: center center;
+        background-size: contain;
+        -webkit-appearance: none;
+        outline: 0;
+    }
+
+    .checkbox-label {
+        width: 85%;
+        padding-left: 10px;
+        text-align: left;
+    }
+
+    input[type="checkbox"] {
+        display: block;
+        width: 18px;
+        height: 18px;
+        background-repeat: no-repeat;
+        background-position: center center;
+        background-size: contain;
+        -webkit-appearance: none;
+        outline: 0;
+    }
+
+    input[type="checkbox"]:checked {
+        background-image: url("../images/checkboxYES.png");
+        background-size: 15px;
+    }
+
+    input[type="checkbox"]:not(:checked) {
+        background-image: url("../images/checkboxNO.png");
+        background-size: 15px;
+    }
+
+    .dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: #f9f9f9;
+        box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+        padding: 12px 16px;
+        z-index: 1;
+        flex-direction: column;
+        border-radius: 10px;
+        min-width: 250px;
+        max-height: 300px;
+        overflow-y: auto;
+    }
+
+    .dropdown.active .dropdown-content {
+        display: block;
+    }
+
+    .dropdown-content label {
+        display: flex;
+        align-items: center;
+    }
+
+    .dropdown-content label:hover {
+        background-color: lightgray;
+    }
+
+    .button_search {
+        width: 25px;
+        height: 25px;
+        background-color: white;
+        border: none;
+        cursor: pointer;
+        background-image: url("../images/lupa.png");
+        background-size: cover;
+        background-position: center;
+        margin-left: 10px;
+        margin-bottom: 3px;
+    }
+
+    h1 {
+        font-weight: bold;
+        font-size: 60px;
+        font-family: MyCustomFontBold;
+    }
+
+    h2 {
+        font-size: 40px;
+        font-family: MyCustomFontBold;
+    }
+</style>
+</head>
+<body>
+    <div class="main">
+        <img id="logo" src="~/images/logo.png" alt="Логотип" />
+        <div class="head_name">
+            <h1>Фемида</h1>
+            <h2>Экспертная система</h2>
+        </div>
+        <form class="search" method="post" action="/Home/Laws">
+            <div id="searchbox">
+            <input name="request" type="text" placeholder="Поиск документов..." />
+            <div class="button-container">
+                <div class="dropdown">
+                    <a href="#" onclick="toggleDropdown()"><img src="~/images/list.png" alt="Dropdown Button" class="button" /></a>
+                    <div class="dropdown-content" id="myDropdown">
+                        <label>
+                            <input type="checkbox" name="ids" value="0" />
+                            <span class="checkbox-label">Все</span>
+                        </label>
+
+                        @foreach (var item in Model)
+                        {
+                            <label>
+                                <input type="checkbox" name="ids" value="@item.Id" />
+                                <span class="checkbox-label">@item.Name</span>
+                            </label>
+                        }
+                    </div>
+                </div>
+                <button class="button_search" type="submit"></button>
+            </div>
+        </div>
+        </form>
+    </div>
+    <script>
+        function toggleDropdown() {
+  var dropdown = document.getElementById("myDropdown");
+  if (dropdown.style.display === "block") {
+    dropdown.style.display = "none";
+  } else {
+    dropdown.style.display = "block";
+  }
+}
+
+function handleCheckboxChange() {
+  var checkboxes = document.querySelectorAll('input[type="checkbox"]');
+  var allCheckbox = checkboxes[0];
+  var otherCheckboxes = Array.from(checkboxes).slice(1);
+
+  if (allCheckbox.checked) {
+    otherCheckboxes.forEach(function (checkbox) {
+      checkbox.checked = false;
+      checkbox.disabled = true;
+    });
+  } else {
+    otherCheckboxes.forEach(function (checkbox) {
+      checkbox.disabled = false;
+    });
+  }
+}
+
+document.addEventListener("click", function (event) {
+  var dropdown = document.getElementById("myDropdown");
+  var button = document.querySelector(".dropdown a img");
+  if (!dropdown.contains(event.target) && event.target !== button) {
+    dropdown.style.display = "none";
+  }
+});
+
+document.addEventListener("DOMContentLoaded", function () {
+  var allCheckbox = document.querySelector('input[type="checkbox"][value="0"]');
+  var checkboxes = document.querySelectorAll('input[type="checkbox"]:not([value="0"])');
+  
+  allCheckbox.addEventListener("change", function () {
+    handleCheckboxChange();
+  });
+
+  checkboxes.forEach(function (checkbox) {
+    checkbox.addEventListener("change", function () {
+      if (checkbox.checked) {
+        allCheckbox.checked = false;
+      }
+    });
+  });
+
+  // Выбрать флажок "Все" при загрузке страницы
+  allCheckbox.checked = true;
+  handleCheckboxChange();
+});
+
+    </script>
+</body>

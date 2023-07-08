@@ -1,0 +1,27 @@
+﻿@{
+    ViewData["Title"] = "Станица разработчика";
+}
+
+<style>
+    .uni_button {
+        display: inline-block;
+        padding: 1% 2%;
+        background-color: grey;
+        color: white;
+        text-decoration: none;
+        border-radius: 10px;
+        font-size: 16px;
+        border: none;
+        cursor: pointer;
+    }
+</style>
+
+<h1>Станица разработчика</h1>
+
+<hr />
+
+<a class="wrapper" asp-action="Documents">Документы</a> <br />
+<a class="wrapper" asp-action="Types">Типы законов</a> <br />
+<a class="wrapper" asp-action="Users">Пользователи</a> <br />
+<a class="wrapper" asp-action="Roles">Роли</a> <br />
+<a class="wrapper" asp-action="NewPasswordForUser">Выдать пароль</a>

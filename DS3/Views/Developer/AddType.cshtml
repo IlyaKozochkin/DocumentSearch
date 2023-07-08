@@ -1,0 +1,85 @@
+﻿@model DS3.Models.TypeDoc
+
+@{ 
+    ViewData["Title"] = "Добавление типа"; 
+} 
+
+<style> 
+    body{
+      background-color: #dedede;
+    }
+
+    
+
+    .container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    
+    .main {
+      padding: 20px; /* Внутренний отступ блока */
+      background-color: white;
+      width: 700px;
+    }
+ 
+    .searchbox input { 
+        width: 100%; 
+        height: 100%; 
+        box-sizing: border-box; 
+        border: 2px solid black; /* Добавляем границу */ 
+        border-radius: 20px; /* Делаем границы закругленными */ 
+        outline: none; /* Убираем контур при фокусе */ 
+        color: black; /* Цвет текста */ 
+        padding-left: 20px; /* Добавляем отступ слева */ 
+    } 
+ 
+    .wrapper { 
+        display: block; 
+        width: 200px; 
+        height: 40px; 
+        line-height: 40px; 
+        font-size: 18px; 
+        font-family: sans-serif; 
+        text-decoration: none; 
+        color: #333; 
+        border: 2px solid #333; 
+        letter-spacing: 2px; 
+        text-align: center; 
+        padding-top: 0px; /*высота текста в кнопке*/ 
+        position: relative; 
+        transition: all .35s; 
+        background-color: white; 
+        position: absolute; 
+        left: 50%; 
+        transform: translate(-50%, -50%); 
+    } 
+ 
+    button:hover { 
+        background-color: #dedede; 
+        color: black; 
+    } 
+ 
+    button:hover:after { 
+        width: 100%; 
+    } 
+</style> 
+
+<div class="container">
+    <div class="main">
+        <form method="post">
+            <h2>Добавление типа</h2>
+            <hr />
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="searchbox">
+                <label>Название</label>
+                <input asp-for="Name" class="form-control" aria-required-"true" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+                <br />
+            </div>
+            <br />
+            <button type="submit" class="wrapper">Добавить</button>
+            <br />
+        </form>
+    </div>
+</div>

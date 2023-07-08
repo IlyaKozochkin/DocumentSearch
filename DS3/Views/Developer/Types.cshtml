@@ -1,0 +1,32 @@
+﻿@model IEnumerable<TypeDoc>
+
+@{
+    ViewData["Title"] = "Типы законов";
+}
+
+<div style="display: flex; justify-content: space-between;">
+    <h1>Типы законов</h1>
+    <div style="margin-top: 20px;">
+        <a class="wrapper" asp-action="AddType">Добавить тип</a>
+    </div>
+</div>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.Id)</th>
+            <th>@Html.DisplayNameFor(model => model.Name)</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.Id)</td>
+                <td>@Html.DisplayFor(modelItem => item.Name)</td>
+            </tr>
+        }
+    </tbody>
+</table>

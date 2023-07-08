@@ -1,0 +1,41 @@
+﻿@{ 
+    ViewData["Title"] = "Добавление документа"; 
+} 
+
+<div class="row">
+    <div class="col-md-4">
+        <form method="post" enctype="multipart/form-data">
+            <h2>Добавление закона</h2>
+            <hr />
+            
+            <div class="form-floating">
+                <input name="fileName" type="text" class="form-control" required pattern='[^"]+' />
+
+                <label>Название</label>
+            </div>
+
+            <br />
+
+            <div class="form-floating">
+                @Html.DropDownList("typeDocId", ViewBag.TypeDocs as SelectList)
+                <br />
+            </div>
+
+            <br />
+
+            <div>
+                <textarea name="keywords" class="form-control" rows="12" required minlength="10" placeholder="Например: Федеральный закон от 15.11.1997 N 143-ФЗ (ред. от 03.08.2018) «Об актах гражданского состояния»"></textarea>
+            </div>
+
+            <br />
+
+            <div>
+                <input type="file" name="file" multiple required/>
+                <br />
+            </div>
+
+            <br />
+            <button type="submit" class="btn btn-primary">Добавить</button>
+        </form>
+    </div>
+</div>

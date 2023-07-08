@@ -1,0 +1,98 @@
+﻿@model DS3.Models.User 
+ 
+@{ 
+    ViewData["Title"] = "Вход"; 
+} 
+ 
+<style> 
+    body{
+      background-image: url(../images/flagproz.jpg);
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center;
+    }
+
+    .row { 
+        display: flex; 
+        justify-content: center; 
+        align-items: center; 
+        height: 100vh; /* Необязательно, если вы хотите, чтобы элемент занимал всю высоту экрана */ 
+        position: absolute; 
+        top: 50%; 
+        left: 50%; 
+        transform: translate(-50%, -50%); 
+        width: 45%; 
+    } 
+ 
+    .center { 
+        position: relative; 
+        top: 37%; 
+        left: 50%; 
+        transform: translate(-50%, -50%); 
+    } 
+ 
+    .searchbox input { 
+        width: 100%; 
+        height: 100%; 
+        box-sizing: border-box; 
+        border: 2px solid black; /* Добавляем границу */ 
+        border-radius: 20px; /* Делаем границы закругленными */ 
+        outline: none; /* Убираем контур при фокусе */ 
+        color: black; /* Цвет текста */ 
+        padding-left: 20px; /* Добавляем отступ слева */ 
+    } 
+ 
+    .wrapper { 
+        display: block; 
+        width: 200px; 
+        height: 40px; 
+        line-height: 40px; 
+        font-size: 18px; 
+        font-family: sans-serif; 
+        text-decoration: none; 
+        color: #333; 
+        border: 2px solid #333; 
+        letter-spacing: 2px; 
+        text-align: center; 
+        padding-top: 0px; /*высота текста в кнопке*/ 
+        position: relative; 
+        transition: all .35s; 
+        background-color: white; 
+        position: fixed; 
+        left: 50%; 
+        transform: translate(-50%, -50%); 
+    } 
+ 
+    button:hover { 
+        background-color: #dedede; 
+        color: black; 
+    } 
+ 
+    button:hover:after { 
+        width: 100%; 
+    } 
+</style> 
+ 
+<div class="row"> 
+    <form method="post"> 
+        <div class="center">
+            <h2 style="text-align: center;">Вход</h2> 
+        </div>
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div> 
+    
+        <div class="searchbox"> 
+            <input asp-for="Login" class="form-control" aria-required-"true" placeholder="Логин"/> 
+            <span asp-validation-for="Login" class="text-danger"></span> 
+            <br /> 
+        </div> 
+    
+        <div class="searchbox"> 
+            <input asp-for="Password" class="form-control" aria-required-"true" type="password" placeholder="Пароль" /> 
+            <span asp-validation-for="Password" class="text-danger"></span> 
+            <br /> 
+        </div> 
+    
+        <br /> 
+        <button type="submit" class="wrapper">Войти</button> 
+    </form> 
+</div>

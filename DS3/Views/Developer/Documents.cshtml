@@ -1,0 +1,41 @@
+﻿@model IEnumerable<Document>
+
+@{
+ViewData["Title"] = "Законы";
+}
+
+<div style="display: flex; justify-content: space-between;">
+    <h1>Законы</h1>
+    <div style="margin-top: 20px;">
+        <a class="wrapper" asp-action="AddDocument">Добавить закон</a>
+    </div>
+</div>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.Id)</th>
+            <th>Название</th>
+            <th>Тип</th>
+            <th></th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.Id)</td>
+                <td>@Html.DisplayFor(modelItem => item.Name)</td>
+                <td>@Html.DisplayFor(modelItem => item.TypeDoc.Name)</td>
+                <td>
+                    <a class="btn btn-sm btn-primary" asp-action="EditDocument" asp-route-Id="@item.Id">Редактировать</a>
+                </td>
+                <td>
+                    <a class="btn btn-sm btn-danger" asp-action="DeleteDocument" asp-route-Id="@item.Id">Удалить</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
